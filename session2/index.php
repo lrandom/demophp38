@@ -54,6 +54,22 @@
             return;
         }
     }
+
+    $mang = array(1, 2, 3, 4, 5);
+
+    //duyệt mảng
+    foreach ($mang as $r) {
+        echo $r . '<br>';
+    };
+
+    $mang2[0] = 2;
+    $mang2[1] = 1;
+    $mang2[2] = 3;
+
+    $mang3[] = 1;
+    $mang3[] = 2;
+
+
     ?>
 </body>
 
