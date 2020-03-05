@@ -82,7 +82,54 @@
         echo '<p>' . $k . '-' . $v . '</p>';
     }
 
+    //mang hai chieu
+    $mang2d = array(
+        array(1, 2, 3, 4),
+        array(3, 3, 4, 5)
+    );
+
+    foreach ($mang2d as $r) {
+        foreach ($r as $r1) {
+            echo $r1 . '<br>';
+        }
+    }
+
+    for ($i = 0; $i < count($mang2d); $i++) {
+        for ($j = 0; $j < count($mang2d[$i]); $j++) {
+            echo $mang2d[$i][$j];
+        }
+    }
+    //mang ba chieu
+    $mang3d = array(
+        array(
+            array(
+                1, 3, 4, 5, 6, 7
+            ),
+            array(
+                4, 5, 6, 7, 8, 9
+            )
+        )
+    );
+
+    $mangAssoc2d = array(
+        array(
+            'fullname' => 'Luan',
+            'age' => 28
+        ),
+        array(
+            'fullname' => 'Nam',
+            'age' => 20
+        )
+    );
+
+    foreach ($mangAssoc2d as $r) {
+        foreach ($r as $key => $value) {
+            echo $key . '-' . $value . '<br>';
+        }
+    }
     ?>
+
+
 </body>
 
 </html>
