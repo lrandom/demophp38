@@ -31,7 +31,7 @@
     }
 
     $mang = array(1, 2, 4, 5, 5);
-    foreach ($variable as  $value) {
+    foreach ($mang as  $value) {
         echo $value;
     }
 
@@ -51,7 +51,7 @@
 
     for ($i = 0; $i < 5; $i++) {
         if ($i == 3) {
-            return;
+            //return;
         }
     }
 
@@ -62,13 +62,25 @@
         echo $r . '<br>';
     };
 
+    //cach dn 2
     $mang2[0] = 2;
     $mang2[1] = 1;
     $mang2[2] = 3;
 
+    //cach dn 3
     $mang3[] = 1;
     $mang3[] = 2;
 
+    //mang lien hop
+    $mangAssoc = array(
+        'fullname' => 'Luan',
+        'age' => 28,
+        'school' => 'NIIT'
+    );
+
+    foreach ($mangAssoc as $k => $v) {
+        echo '<p>' . $k . '-' . $v . '</p>';
+    }
 
     ?>
 </body>
