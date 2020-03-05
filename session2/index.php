@@ -127,6 +127,14 @@
             echo $key . '-' . $value . '<br>';
         }
     }
+
+    $name = 'Luan';
+    $sayHi = 'My name is $name';
+    echo $sayHi;
+    print_r($sayHi);
+
+    echo strlen($sayHi);
+    echo strpos($sayHi, 'My');
     ?>
 
 
