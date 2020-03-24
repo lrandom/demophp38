@@ -21,6 +21,44 @@ if (isset($_GET['delete'])) {
         $_SESSION['cart'] = $cart;
     }
 }
+
+//nếu như nguơi dùng gửi thông tin mong muốn là tăng số luợng sp
+if (isset($_GET['plus'])) {
+    $id = $_GET['id'];
+    $cart = $_SESSION['cart'];
+
+    //tìm kiếm phần tử theo id trong mảng
+    for ($i = 0; $i < count($cart); $i++) {
+        if ($id == $cart[$i]['id']) {
+            //cập nhật tăng số luợng lên
+            $cart[$i]['quantity'] = $cart[$i]['quantity'] + 1;
+            break;
+        }
+    }
+
+    $_SESSION['cart'] = $cart;
+}
+
+
+//nếu như nguơi dùng gửi thông tin mong muốn là tăng số luợng sp
+if (isset($_GET['minus'])) {
+    $id = $_GET['id'];
+    $cart = $_SESSION['cart'];
+
+    //tìm kiếm phần tử theo id trong mảng
+    for ($i = 0; $i < count($cart); $i++) {
+        if ($id == $cart[$i]['id']) {
+            //giảm số luợng đi
+            if ($cart[$i]['quantity'] >= 2) {
+                $cart[$i]['quantity'] = $cart[$i]['quantity'] - 1;
+            }
+            break;
+        }
+    }
+
+    $_SESSION['cart'] = $cart;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,7 +85,11 @@ if (isset($_GET['delete'])) {
         <td><?php echo $hiep['name']; ?></td>
         <td><?php echo $hiep['price']; ?></td>
         <td><?php echo $hiep['quantity']; ?></td>
-        <td><a href="cart.php?delete&id=<?php echo $hiep['id']; ?>">Xoá</a></td>
+        <td>
+            <a href="cart.php?delete&id=<?php echo $hiep['id']; ?>">Xoá</a>
+            <a href="?id=<?php echo $hiep['id']; ?>&plus">+</a>
+            <a href="?id=<?php echo $hiep['id'] ?>&minus">-</a>
+        </td>
     </tr>
     <?php
         }
