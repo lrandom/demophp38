@@ -1,5 +1,5 @@
 <?php
-//var_dump($_FILES);
+var_dump($_FILES);
 if (isset($_FILES['file']) && $_FILES['file']['name'] != null) {
     $size = $_FILES['file']['size'];
 
@@ -49,7 +49,7 @@ if (isset($_FILES['file']) && $_FILES['file']['name'] != null) {
         }
     }
     ?>
-    <form enctype="multipart/form-data" method="post">
+    <form action="view.php" enctype="multipart/form-data" method="post">
         <input type="file" name="file" />
         <input type="submit" value="Submit" />
     </form>

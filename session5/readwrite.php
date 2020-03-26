@@ -9,24 +9,30 @@
 
 <body>
     <?php
-    /*$file = fopen('demo.txt', 'r');
+    $file = fopen('demo.txt', 'r');
     if ($file == false) {
         echo 'Không thể mở file';
         exit();
     }
 
+    $mang = [];
+    //đọc từng dòng
+    while (!feof($file)) {
+        $mang[] = fgets($file);
+    }
+
     $filesize = filesize('demo.txt');
     $content = fread($file, $filesize);
-    fclose($file);*/
+    fclose($file);
 
-    $file = fopen('demo1.txt', 'w');
+    /* $file = fopen('demo1.txt', 'w');
     if ($file == false) {
         echo 'Không thể mở file';
         exit();
     }
 
     fwrite($file, "HI HI, Sầu tím thiệp hồng");
-    fclose($file);
+    fclose($file);*/
     ?>
     <p><?php //echo $content 
         ?></p>
