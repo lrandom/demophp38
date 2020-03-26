@@ -18,6 +18,7 @@ if (isset($_FILES['file']) && $_FILES['file']['name'] != null) {
         $dir = date('m', time()) . '_' . date('yy', time()) . '/'; // 3_2020 định dạng;
         $dir = 'uploads/' . $dir; // uploads/3_2020;
 
+        // tạo thư mục mới nếu chưa tồn tại (tạo thư mục theo tháng và năm)
         if (!file_exists($dir) && !is_dir($dir)) {
             mkdir($dir, 0777); //make directory
         }
