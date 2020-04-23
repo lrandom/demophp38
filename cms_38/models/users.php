@@ -39,7 +39,7 @@ class Users extends DB implements IModel
         }
 
         //tra ve so ban ghi
-        return $stm->rowCount();
+        return $this->db->lastInsertId();
     }
 
     function delete($id)
@@ -60,8 +60,18 @@ class Users extends DB implements IModel
         } catch (\Throwable $th) {
             echo $th->getMessage();
         }
-
         return $stm->rowCount();
+    }
+
+    function updateAvatar($path, $id)
+    {
+        try {
+            $stm = $this->db->prepare('UPDATE ' . self::tableName . ' 
+            SET avt = :avatar WHERE id = :id');
+            $stm->execute(array(':avatar' => $path, ':id' => $id));
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
     }
 
     function getById($id)

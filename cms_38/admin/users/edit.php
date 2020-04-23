@@ -17,8 +17,23 @@ if (isset($_GET['id'])) {
 }
 if (isset($_POST['id'])) {
     $id = $_POST['id'];
-
     $users->update($_POST);
+    if (isset($_FILES['file']) && $_FILES['file']['name'] != '') {
+        $filename = './../../uploads/' . time() . $_FILES['file']['name'];
+
+        //xoá file đi
+        if (file_exists($obj['avt'])) {
+            try {
+                unlink($obj['avt']);
+            } catch (Exception $e) {
+                echo $e->getMessage();
+            }
+        }
+
+        move_uploaded_file($_FILES['file']['tmp_name'], $filename);
+        $users->updateAvatar($filename, $id);
+    }
+
     header('Location:edit.php?id=' . $id);
 }
 
@@ -40,7 +55,7 @@ if (isset($_POST['id'])) {
         <?php
         }
         ?>
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
 
             <input type="hidden" name="id" value="<?php echo $obj['id'] ?>" />
             <div class="form-group row">
@@ -56,6 +71,13 @@ if (isset($_POST['id'])) {
                 </div>
             </div>
 
+            <div class="form-group row">
+                <label>Ảnh đại diện</label>
+                <img src="<?php echo $obj['avt']; ?>" />
+                <div class="col-sm-10">
+                    <input type="file" name="file" />
+                </div>
+            </div>
 
             <input type="submit" class="btn btn-primary"></input>
         </form>

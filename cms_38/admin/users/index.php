@@ -7,6 +7,10 @@ if (isset($_GET['action'])) {
     switch ($action) {
         case 'delete':
             if (is_numeric($_GET['id'])) {
+                $obj = $users->getById($_GET['id']);
+                if (file_exists($obj['avt'])) {
+                    unlink($obj['avt']);
+                }
                 $users->delete($_GET['id']);
             }
             break;
@@ -32,6 +36,7 @@ if (isset($_GET['action'])) {
                     <th scope="col">Username</th>
                     <th scope="col">Address</th>
                     <th scope="col">Phone</th>
+                    <th scope="col">Avt</th>
                     <th scope="col">Thao tác</th>
                 </tr>
             </thead>
@@ -44,7 +49,6 @@ if (isset($_GET['action'])) {
                 <?php
 
                 $list = $users->getAll(0, 5);
-
                 foreach ($list as $r) {
                 ?>
                 <tr>
@@ -52,6 +56,7 @@ if (isset($_GET['action'])) {
                     <td><?php echo $r['username'] ?></td>
                     <td><?php echo $r['address'] ?></td>
                     <td><?php echo $r['phone'] ?></td>
+                    <td><img style="width:50px;height:50px;" src="<?php echo $r['avt']; ?>" /></td>
                     <td>
                         <a class="btn btn-danger" href="?action=delete&id=<?php echo $r['id'] ?>">Xoá</a>
                         <a class="btn btn-warning" href="edit.php?id=<?php echo $r['id'] ?>">Sửa</a>

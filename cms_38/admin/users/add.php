@@ -7,8 +7,15 @@ require_once('./../commons/head.php');
 require_once('./../../models/users.php');
 if (isset($_POST['username'])) {
     $users = new Users();
-    $count = $users->insert($_POST);
-    if ($count == 1) {
+    $insertId = $users->insert($_POST);
+    if (isset($_FILES['file']) && $_FILES['file']['name'] != '') {
+        $filename = './../../uploads/' . time() . $_FILES['file']['name'];
+        echo $filename;
+        // exit();
+        move_uploaded_file($_FILES['file']['tmp_name'], $filename);
+        $users->updateAvatar($filename, $insertId);
+    }
+    if ($insertId != 0) {
         $_SESSION['success'] = 'Thêm thành công';
     }
 }
@@ -32,7 +39,7 @@ if (isset($_POST['username'])) {
         <?php
         }
         ?>
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
 
             <div class="form-group row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">username</label>
@@ -56,6 +63,13 @@ if (isset($_POST['username'])) {
                 <label for="staticEmail" class="col-sm-2 col-form-label">password</label>
                 <div class="col-sm-10">
                     <input type="password" name="password">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label>Ảnh đại diện</label>
+                <div class="col-sm-10">
+                    <input type="file" name="file" />
                 </div>
             </div>
 
