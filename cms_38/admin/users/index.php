@@ -1,6 +1,8 @@
 <?php
 require_once('./../commons/head.php');
+require_once('./../../helper.php');
 require_once('./../../models/users.php');
+
 $users = new Users();
 if (isset($_GET['action'])) {
     $action = $_GET['action'];
@@ -47,8 +49,12 @@ if (isset($_GET['action'])) {
 
             <tbody>
                 <?php
-
-                $list = $users->getAll(0, 5);
+                if (isset($_GET['page'])) {
+                    $offset = ($_GET['page'] - 1) * 2;
+                } else {
+                    $offset = 0;
+                }
+                $list = $users->getAll($offset, 2);
                 foreach ($list as $r) {
                 ?>
                 <tr>
@@ -69,6 +75,11 @@ if (isset($_GET['action'])) {
 
             </tbody>
         </table>
+
+        <?php
+        generatePage($users->getPDO(), 'users', 2);
+
+        ?>
     </div>
 </body>
 <?php
